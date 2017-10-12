@@ -1,10 +1,9 @@
-module L20n
+module L20n exposing
   ( ready
   , view
   , id
   , args
   )
-  where
 {-| Elm bindings to the l20n.js localisation framework.
 # Signals
 @docs ready
@@ -18,13 +17,12 @@ import Native.L20n
 
 import Html
 import Html.Attributes as Attributes
-import Signal exposing (Signal)
 import Maybe exposing (..)
 import List
 
 
 {-| Triggers when L20n and document.l10n are available. -}
-ready : Signal ()
+ready : Sub msg
 ready =
   Native.L20n.ready
 
@@ -52,7 +50,7 @@ view manifest language =
 
         id "Hello"
 -}
-id : String -> Html.Attribute
+id : String -> Html.Attribute msg
 id identifier =
   Attributes.attribute
     "data-l10n-id"
@@ -66,7 +64,7 @@ id identifier =
           , ("Gender", "Feminine")
           ]
 -}
-args : List (String, String) -> Html.Attribute
+args : List (String, String) -> Html.Attribute msg
 args arguments =
   Attributes.attribute
     "data-l10n-args"
